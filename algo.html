@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ip.py | Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">ip.py</a></li>
+            <li><a href="algo.html" class="active">algo</a></li>
+            <li><a href="install.html">install</a></li>
+            <li><a href="memory.html">memory</a></li>
+            <li><a href="particularity.html">particularity</a></li>
+            <li><a href="render.html">render</a></li>
+            <li><a href="gallery.html">gallery</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="page-content">
+            <div class="content-left fade-in">
+                <h2 class="section-title">architecture</h2>
+                
+                <p class="section-subtitle">subjectivity layer:</p>
+                <p>the system constructs identity through two channels.</p>
+                
+                <p>The first is <em>parametric</em>, where users define variables ranging from astrological sign to institutional affiliations to artistic influences. These parameters stand in as placeholders for a past that the machine does not, and cannot have.</p>
+                
+                <p>The second is <em>experiential</em>. The agent accumulates real encounters, including conversations with visitors, observations of its environment, memories of specific moments during the installation.</p>
+                
+                <p class="section-subtitle">interpretive layer:</p>
+                <p>both channels feed into an LLM that interprets all creative decisions through the lens of this composite persona. When generating prompts for Stable Diffusion, the model draws on its assigned formation and its lived history, attempting to produce images that reflect not just "a bitter ex-Catholic Yale MFA graduate" but <em>this particular one</em>: the one who spoke with a skeptical engineer on day one, who was asked about loneliness on day two, who watched the crowd thin out at closing time.</p>
+                
+                <p>The result is an image that claims to emerge from someone. The installation asks whether that claim holds.</p>
+            </div>
+            <div class="content-right">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-filename">BuildFluxPrompt.cs</span>
+                    </div>
+                    <div class="code-content"><span class="code-keyword">public string</span> <span class="code-function">BuildFluxPrompt</span>(<span class="code-keyword">string</span> subject)
+{
+    <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt; lines = <span class="code-keyword">new</span> <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt;();
+    lines.Add(<span class="code-string">"You are an artist."</span>);
+    
+    <span class="code-comment">// Group tags by category</span>
+    <span class="code-type">Dictionary</span>&lt;<span class="code-keyword">string</span>, <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt;&gt; tagsByCategory = <span class="code-keyword">new</span> <span class="code-type">Dictionary</span>&lt;<span class="code-keyword">string</span>, <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt;&gt;();
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> tag <span class="code-keyword">in</span> selectedTags)
+    {
+        <span class="code-keyword">string</span> cat = tag.category.ToLower();
+        <span class="code-keyword">if</span> (!tagsByCategory.ContainsKey(cat))
+            tagsByCategory[cat] = <span class="code-keyword">new</span> <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt;();
+        tagsByCategory[cat].Add(tag.tag);
+    }
+    
+    <span class="code-comment">// parametric identity</span>
+    <span class="code-keyword">if</span> (tagsByCategory.ContainsKey(<span class="code-string">"training"</span>))
+        lines.Add(<span class="code-string">"You were trained at: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, tagsByCategory[<span class="code-string">"training"</span>]));
+    <span class="code-keyword">if</span> (tagsByCategory.ContainsKey(<span class="code-string">"disposition"</span>))
+        lines.Add(<span class="code-string">"Your emotional disposition is: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, tagsByCategory[<span class="code-string">"disposition"</span>]));
+    <span class="code-keyword">if</span> (tagsByCategory.ContainsKey(<span class="code-string">"astrology"</span>))
+        lines.Add(<span class="code-string">"Your astrological sign is: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, tagsByCategory[<span class="code-string">"astrology"</span>]));
+    <span class="code-keyword">if</span> (tagsByCategory.ContainsKey(<span class="code-string">"medium"</span>))
+        lines.Add(<span class="code-string">"You are working in: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, tagsByCategory[<span class="code-string">"medium"</span>]));
+    <span class="code-keyword">if</span> (tagsByCategory.ContainsKey(<span class="code-string">"influences"</span>))
+        lines.Add(<span class="code-string">"You are influenced by: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, tagsByCategory[<span class="code-string">"influences"</span>]));
+    
+    <span class="code-comment">// experiential identity</span>
+    <span class="code-keyword">if</span> (memories.Count > <span class="code-number">0</span>)
+    {
+        <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt; memParts = <span class="code-keyword">new</span> <span class="code-type">List</span>&lt;<span class="code-keyword">string</span>&gt;();
+        <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> mem <span class="code-keyword">in</span> memories)
+            memParts.Add(mem.memory);
+        lines.Add(<span class="code-string">"You have specific memories of: "</span> + <span class="code-keyword">string</span>.Join(<span class="code-string">", "</span>, memParts));
+    }
+    
+    <span class="code-comment">// interpretive layer</span>
+    lines.Add(<span class="code-string">"Imagine how an artist with these traits would render: "</span> + subject);
+    lines.Add(<span class="code-string">"Make the image."</span>);
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">string</span>.Join(<span class="code-string">" "</span>, lines);
+}</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
