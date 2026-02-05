@@ -11,7 +11,15 @@
 </head>
 <body>
     <nav>
-        <ul>
+        <div class="nav-header">
+            <a href="index.html" class="nav-logo">ip.py</a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul id="nav-menu">
             <li><a href="index.html" class="active">ip.py</a></li>
             <li><a href="algo.html">algo</a></li>
             <li><a href="install.html">install</a></li>
@@ -42,14 +50,19 @@
                     <div class="project-date">december 2025</div>
                     <div class="team">
                         <span class="team-member"><a href="https://www.linkedin.com/in/austin-stanbury/" target="_blank">austin stanbury</a></span>
-                        <span class="team-member"><a href="https://www.linkedin.com/in/tiffany-dangg/" target="_blank">tiffany dang</a></span>
-                        <span class="team-member"><a href="https://www.linkedin.com/in/juanlam/" target="_blank">juan lam</a></span>
-                        <span class="team-member"><a href="https://www.linkedin.com/in/aiden-white-pifer-a65765162/" target="_blank">aiden white pifer</a></span>
-                        <span class="team-member"><a href="https://www.linkedin.com/in/jiminkwak/" target="_blank">jimin kwak</a></span>
+                        <span class="team-member"><a href="https://www.linkedin.com/in/TIFFANY-LINKEDIN/" target="_blank">tiffany dang</a></span>
+                        <span class="team-member"><a href="https://www.linkedin.com/in/JUAN-LINKEDIN/" target="_blank">juan lam</a></span>
+                        <span class="team-member"><a href="https://www.linkedin.com/in/AIDEN-LINKEDIN/" target="_blank">aiden white pifer</a></span>
+                        <span class="team-member"><a href="https://www.linkedin.com/in/JIMIN-LINKEDIN/" target="_blank">jimin kwak</a></span>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+<script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('open');
+        }
+    </script>
 </body>
 </html>

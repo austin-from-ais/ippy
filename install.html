@@ -11,7 +11,15 @@
 </head>
 <body>
     <nav>
-        <ul>
+        <div class="nav-header">
+            <a href="index.html" class="nav-logo">ip.py</a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <ul id="nav-menu">
             <li><a href="index.html">ip.py</a></li>
             <li><a href="algo.html">algo</a></li>
             <li><a href="install.html" class="active">install</a></li>
@@ -53,5 +61,10 @@
             </div>
         </div>
     </main>
+<script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
