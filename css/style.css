@@ -39,6 +39,14 @@ nav {
     background: var(--white);
 }
 
+.nav-header {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+}
+
 nav ul {
     list-style: none;
 }
@@ -442,7 +450,7 @@ p em {
 }
 
 @media (max-width: 768px) {
-    /* Nav moves to top */
+    /* Mobile nav with hamburger */
     nav {
         position: fixed;
         top: 0;
@@ -455,14 +463,61 @@ p em {
         z-index: 1000;
     }
 
-    nav ul {
+    .nav-header {
         display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--orange);
+        text-decoration: none;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    .hamburger span {
+        width: 24px;
+        height: 3px;
+        background: var(--black);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--gray-light);
+    }
+
+    nav ul.open {
+        display: flex;
     }
 
     nav ul li {
         margin-bottom: 0;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 12px 0;
+        font-size: 16px;
+        border-bottom: 1px solid var(--gray-light);
+    }
+
+    nav ul li:last-child a {
+        border-bottom: none;
     }
 
     main {
